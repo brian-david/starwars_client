@@ -12,7 +12,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 70%;
   margin: auto;
   flex-wrap: wrap;
