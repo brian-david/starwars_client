@@ -3,6 +3,9 @@ import { gql, useQuery } from "@apollo/client";
 const PEOPLE_PAGE = gql`
   query GetPeoplePage {
     peoplepage {
+      count
+      next
+      previous
       results {
         name
         height
