@@ -7,6 +7,14 @@ import peoplePageReducer, {
   peoplePageSlice,
 } from "../state/reducers/peoplePageReducer";
 import { RootState } from "../state/store";
+import PersonCard from "../components/PersonCard";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 40px;
+`;
 
 const HomePage = () => {
   const state = useSelector((state: RootState) => state.peoplePageReducer);
@@ -29,11 +37,12 @@ const HomePage = () => {
   if (loading) return <p>loading...</p>;
   if (error) return <p>`ERROR: ${error.message}`</p>;
   return (
-    <div>
-      {state.people.map((person: Person, index: number) => {
-        return <p>{person.name}</p>;
-      })}
-    </div>
+    <Container>
+      {state.people !== undefined &&
+        state.people.map((person: Person, index: number) => {
+          return <PersonCard person={{ ...person }} />;
+        })}
+    </Container>
   );
 };
 
