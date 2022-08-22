@@ -1,5 +1,26 @@
+import { gql, useQuery } from "@apollo/client";
+
+const PEOPLE_PAGE = gql`
+  query GetPeoplePage {
+    peoplepage {
+      results {
+        name
+        height
+        mass
+        gender
+        homeworld {
+          name
+        }
+      }
+    }
+  }
+`;
+
 const HomePage = () => {
-  return <h1>this is the homepage</h1>;
+  const { loading, error, data } = useQuery(PEOPLE_PAGE);
+  if (loading) return <p>loading...</p>;
+  if (error) return <p>`ERROR: ${error.message}`</p>;
+  return <p>{JSON.stringify(data)}</p>;
 };
 
 export default HomePage;
