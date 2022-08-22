@@ -6,7 +6,7 @@ export const peoplePageSlice = createSlice({
   initialState: {} as PeoplePage,
   reducers: {
     setCount: (state, action) => {
-      return state = action.payload;
+      return (state = { ...action.payload });
     },
   },
 });

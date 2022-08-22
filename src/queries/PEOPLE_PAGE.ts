@@ -6,7 +6,7 @@ export const PEOPLE_PAGE = gql`
       count
       next
       previous
-      results {
+      people: results {
         name
         height
         mass
