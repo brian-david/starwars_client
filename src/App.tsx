@@ -1,12 +1,14 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { Provider } from "react-redux";
+import store from "./state/store";
 
 function App() {
   return (
-    <div className="App">
-      <h1>This is the home page</h1>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <h1>This is the home page</h1>
+      </div>
+    </Provider>
   );
 }
 
