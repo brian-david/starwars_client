@@ -15,6 +15,7 @@ import Spinner from "../styled-components/spinner";
 import CenteredDiv from "../styled-components/centered-div";
 import Container from "../styled-components/responsive-container";
 import Navigation from "../styled-components/navigator";
+import PersonModal from "../components/PersonModal";
 
 const HomePage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -62,10 +63,10 @@ const HomePage = () => {
   if (error) return <p>`ERROR: ${error.message}`</p>;
   return (
     <>
+      {state.modal.open && <PersonModal />}
       <Container>
         {state.page.people !== undefined &&
           state.page.people.map((person: Person, index: number) => {
-            console.log("render", person.name);
             return <PersonCard person={{ ...person }} />;
           })}
       </Container>

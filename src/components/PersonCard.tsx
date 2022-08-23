@@ -13,7 +13,7 @@ const PersonCard = ({ person, person: { name } }: PersonCardProps) => {
     <PersonCardDiv
       onClick={() => {
         dispatch(modalSlice.actions.setPerson(person));
-        dispatch(modalSlice.actions.setOpen);
+        dispatch(modalSlice.actions.setOpen());
       }}
     >
       {name}
