@@ -20,6 +20,7 @@ const PersonCardDiv = styled.div`
   :hover {
     transform: scale(1.05);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
   }
   @media (max-width: 768px) {
     width: 95%;

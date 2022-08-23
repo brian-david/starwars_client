@@ -5,11 +5,11 @@ export const peoplePageSlice = createSlice({
   name: "peoplePage",
   initialState: {} as PeoplePage,
   reducers: {
-    setCount: (state, action) => {
+    setPage: (state, action) => {
       return (state = { ...action.payload });
     },
   },
 });
 
-export const { setCount } = peoplePageSlice.actions;
+export const { setPage } = peoplePageSlice.actions;
 export default peoplePageSlice.reducer;

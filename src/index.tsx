@@ -8,7 +8,7 @@ import { store } from "./state/store";
 import { Provider } from "react-redux";
 
 const client = new ApolloClient({
-  uri: "https://server-starwars.herokuapp.com",
+  uri: "http://localhost:4000/",
   cache: new InMemoryCache({
     addTypename: false,
   }),
