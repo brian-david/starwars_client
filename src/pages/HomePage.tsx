@@ -1,85 +1,87 @@
 import { useQuery } from "@apollo/client";
 import { Person } from "../types/types";
 import { PEOPLE_PAGE } from "../queries/PEOPLE_PAGE";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import peoplePageReducer, {
-  peoplePageSlice,
-} from "../state/reducers/peoplePageReducer";
+import { peoplePageSlice } from "../state/reducers/peoplePageReducer";
 import { RootState } from "../state/store";
 import PersonCard from "../components/PersonCard";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowCircleLeft,
   faArrowCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 70%;
-  margin: 40px auto;
-  flex-wrap: wrap;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    width: 90%;
-  }
-`;
-
-const Navigation = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
+import Spinner from "../styled-components/spinner";
+import CenteredDiv from "../styled-components/centered-div";
+import Container from "../styled-components/responsive-container";
+import Navigation from "../styled-components/navigator";
 
 const HomePage = () => {
-  const state = useSelector((state: RootState) => state.peoplePageReducer);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const state = useSelector((state: RootState) => state.reducerIndex);
   const { loading, error, data } = useQuery(PEOPLE_PAGE, {
-    variables: { pageId: 5 },
+    variables: { pageId: currentPage },
   });
   const dispatch = useDispatch();
 
-  const handleNavigate = () => {
-    console.log("change page");
+  const updatePage = (direction: string) => {
+    if (direction === "next") {
+      if (state.page.nextPage !== null) {
+        setCurrentPage((currentState) => currentState + 1);
+      }
+    } else {
+      if (state.page.previousPage !== null) {
+        setCurrentPage((currentState) => currentState - 1);
+      }
+    }
   };
 
   useEffect(() => {
-    console.log("call useEffect in HomePage");
+    console.log("Home page render");
     if (data) {
+      console.log("dispatch", data.peoplepage);
       dispatch(peoplePageSlice.actions.setPage(data.peoplepage));
-      console.log(JSON.stringify(data.peoplepage));
     }
   }, [data, dispatch]);
 
   useEffect(() => {
-    console.log("Rerender");
-    console.log("STATE = ", state);
+    console.log("state change");
   }, [state]);
 
-  if (loading) return <p>loading...</p>;
+  useEffect(() => {
+    console.log("DISPATCH");
+  }, [dispatch]);
+
+  if (loading)
+    return (
+      <CenteredDiv>
+        <Spinner />
+      </CenteredDiv>
+    );
+
   if (error) return <p>`ERROR: ${error.message}`</p>;
   return (
     <>
       <Container>
-        {state.people !== undefined &&
-          state.people.map((person: Person, index: number) => {
+        {state.page.people !== undefined &&
+          state.page.people.map((person: Person, index: number) => {
+            console.log("render", person.name);
             return <PersonCard person={{ ...person }} />;
           })}
       </Container>
       <Navigation>
-        {state.previousPage !== null && (
+        {state.page.previousPage !== null && (
           <FontAwesomeIcon
+            onClick={() => updatePage("previous")}
             style={{ margin: "10px", cursor: "pointer" }}
             size="4x"
             icon={faArrowCircleLeft}
           />
         )}
-        {state.nextPage && (
+        <p>{currentPage}</p>
+        {state.page.nextPage !== null && (
           <FontAwesomeIcon
-            onClick={handleNavigate}
+            onClick={() => updatePage("next")}
             style={{ margin: "10px", cursor: "pointer" }}
             size="4x"
             icon={faArrowCircleRight}

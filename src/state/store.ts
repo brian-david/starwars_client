@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import peoplePageReducer from "./reducers/peoplePageReducer";
+import reducerIndex from "./reducers/reducerIndex";
 
 export const store = configureStore({
   reducer: {
-    peoplePageReducer,
+    reducerIndex,
   },
 });
 
