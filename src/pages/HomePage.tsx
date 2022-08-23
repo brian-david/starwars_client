@@ -45,14 +45,6 @@ const HomePage = () => {
     }
   }, [data, dispatch]);
 
-  useEffect(() => {
-    console.log("state change");
-  }, [state]);
-
-  useEffect(() => {
-    console.log("DISPATCH");
-  }, [dispatch]);
-
   if (loading)
     return (
       <CenteredDiv>
