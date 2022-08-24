@@ -7,7 +7,7 @@ const PersonCardDiv = styled.div`
   margin: 10px;
   max-width: 250px;
   height: 40px;
-  line-height: 40px;
+  justify-content: center;
   width: 50%;
   text-align: center;
   transition: transform 0.2s;

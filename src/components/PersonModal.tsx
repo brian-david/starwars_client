@@ -16,6 +16,10 @@ const PersonModal = () => {
           close
         </button>
         <p>{state.person.name}</p>
+        <p>{`Height: ${state.person.height}`}</p>
+        <p>{`mass: ${state.person.mass}`}</p>
+        <p>{`gender: ${state.person.gender}`}</p>
+        <p>{`homeworld: ${state.person.homeworld.name}`}</p>
       </ModalContainer>
     </ModalBackground>
   );
