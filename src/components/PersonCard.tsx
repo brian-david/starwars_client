@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import modalReducer, { modalSlice } from "../state/reducers/modalReducer";
 import PersonCardDiv from "../styled-components/person-card-div";

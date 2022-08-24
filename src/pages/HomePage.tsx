@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@apollo/client";
 import { Person } from "../types/types";
 import { PEOPLE_PAGE } from "../queries/PEOPLE_PAGE";
