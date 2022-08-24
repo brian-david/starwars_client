@@ -17,7 +17,11 @@ const PersonCard = ({ person, person: { name } }: PersonCardProps) => {
         dispatch(modalSlice.actions.setOpen());
       }}
     >
-      {name}
+      <p>`Name: ${person.name}`</p>
+      <p>`Height: ${person.height}`</p>
+      <p>`mass: ${person.mass}`</p>
+      <p>`gender: ${person.gender}`</p>
+      <p>`homeworld: ${person.homeworld.name}`</p>
     </PersonCardDiv>
   );
 };
